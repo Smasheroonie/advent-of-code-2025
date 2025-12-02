@@ -33,4 +33,23 @@ for pair in open("input.txt").read().strip().split(','):
         if len(s_num) % 2 == 0 and s_num[:len(s_num)//2] == s_num[len(s_num)//2:]:
             total += num
 print(total)
+
+---
+
+Using regex:
+
+import re
+
+total = 0
+pattern = re.compile(r'^(\d+)\1$')
+
+for pair in open("input.txt").read().strip().split(','):
+    start, end = map(int, pair.split('-'))
+
+    for num in range(start, end):
+        s_num = str(num)
+        if pattern.fullmatch(s_num):
+            total += num
+print(total)
+
 '''
