@@ -21,3 +21,16 @@ for i in even_len:
         total += int(pattern)
 
 print(total)
+
+'''
+Simplified:
+
+total = 0
+for pair in open("input.txt").read().strip().split(','):
+    start, end = map(int, pair.split('-'))
+    for num in range(start, end):
+        s_num = str(num)
+        if len(s_num) % 2 == 0 and s_num[:len(s_num)//2] == s_num[len(s_num)//2:]:
+            total += num
+print(total)
+'''

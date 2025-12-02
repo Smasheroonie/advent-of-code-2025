@@ -44,3 +44,62 @@ for i in odd_len:
         total += int(num) 
 
 print(total)
+
+'''
+Simplified:
+
+total = 0
+for pair in open("input.txt").read().strip().split(','):
+    start, end = map(int, pair.split('-'))
+    
+    for num in range(start, end + 1):
+        s_num = str(num)
+        length = len(s_num)
+        
+        # Handle even-length numbers
+        if length % 2 == 0:
+            if length == 6:
+                if s_num[:2] == s_num[2:4] == s_num[4:6]:
+                    total += num
+            elif length == 10:
+                if s_num[:2] == s_num[2:4] == s_num[4:6] == s_num[6:8] == s_num[8:10]:
+                    total += num
+            else:
+                half = length // 2
+                if s_num[:half] == s_num[half:]:
+                    total += num
+        
+        # Handle odd-length numbers > 1
+        elif length > 1 and length % 2 != 0:
+            if length == 9:
+                if s_num[:3] == s_num[3:6] == s_num[6:9]:
+                    total += num
+            else:
+                # Check for consecutive duplicates
+                has_consecutive = any(s_num[i] == s_num[i+1] for i in range(len(s_num)-1))
+                if has_consecutive:
+                    total += num
+
+print(total)
+
+---
+
+using regex:
+
+import re
+
+total = 0
+pattern = re.compile(r'^(\d+)\1+$')
+
+for pair in open("input.txt").read().strip().split(','):
+    start, end = map(int, pair.split('-'))
+    
+    for num in range(start, end + 1):
+        s_num = str(num)
+        # Check if the entire number consists of a repeating pattern
+        if pattern.fullmatch(s_num):
+            total += num
+
+print(total)
+
+'''
