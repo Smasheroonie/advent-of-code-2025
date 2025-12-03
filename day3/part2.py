@@ -42,5 +42,5 @@ def battery_sort(bank, num_of_batteries):
     if len(highest_total_joltage) == 12: print(highest_total_joltage)
     return highest_total_joltage
 
-joltage = sum(int(battery_sort(bank, 12)) for bank in input) # add up all the highest joltages for the answer
+joltage = sum(int(battery_sort(bank, 12)) for bank in input) # add up all the highest joltages for the answer. Can change 2nd parameter of battery_sort from 12 to 2 to solve part 1 as well.
 print('Joltage:', joltage)
